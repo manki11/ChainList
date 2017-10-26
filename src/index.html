@@ -88,18 +88,18 @@
               </div>
               <div class="form-group">
                 <label for="price">Price in ETH</label>
-                <input type="number" class="form-control" id="price" id="article_price" placeholder="1" pattern="[0-9]+([\.,][0-9]+)?" step="0.01">
+                <input type="number" class="form-control" id="article_price" placeholder="1" pattern="[0-9]+([\.,][0-9]+)?" step="0.01">
               </div>
               <div class="form-group">
                 <label for="description">Description</label>
-                <textarea type="text" id="description" class="form-control vresize" id="article_description" placeholder="Describe your article" maxlength="255"></textarea>
+                <textarea type="text" class="form-control resize" id="article_description" placeholder="Describe your article" maxlength="255"></textarea>
               </div>
             </form>
           </div>
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary btn-success" data-dismiss="modal" onclick="">Submit</button>
+        <button type="button" class="btn btn-primary btn-success" data-dismiss="modal" onclick="App.sellArticle(); return false;">Submit</button>
         <button type="button" class="btn" data-dismiss="modal">Close</button>
       </div>
     </div>

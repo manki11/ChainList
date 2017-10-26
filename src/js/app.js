@@ -10,9 +10,12 @@ App = {
     initWeb3: function() {
         // Initialize web3 and set the provider to the testRPC.
         if (typeof web3 !== 'undefined') {
+            console.log("not mine!");
+            
             App.web3Provider = web3.currentProvider;
             web3 = new Web3(web3.currentProvider);
         } else {
+            console.log("mine!");
             // set the provider you want from Web3.providers
             App.web3Provider = new Web3.providers.HttpProvider('http://localhost:8545');
             web3 = new Web3(App.web3Provider);
@@ -58,7 +61,7 @@ App = {
         App.contracts.ChainList.deployed().then(function(instance) {
             return instance.getArticle.call();
         }).then(function(article) {
-            if (article[0] === 0x0) {
+            if (article[0] == 0x0) {
                 // no article
                 return;
             }
@@ -66,6 +69,9 @@ App = {
             // Retrieve and clear the article placeholder
             var articlesRow = $('#articlesRow');
             articlesRow.empty();
+            
+            console.log(article[0]);
+            
 
             // Retrieve and fill the article template
             var articleTemplate = $('#articleTemplate');
@@ -84,6 +90,36 @@ App = {
             articlesRow.append(articleTemplate.html());
         }).catch(function(err) {
             console.log(err.message);
+        });
+    },
+
+    sellArticle: function() {
+        console.log("in sell article!");
+        
+        // retrieve details of the article
+        var _article_name = $("#article_name").val();
+        var _description = $("#article_description").val();
+        var _price = web3.toWei(parseInt($("#article_price").val() || 10), "ether");
+
+        console.log(_article_name);
+        console.log(_description);
+        console.log(_price);
+
+
+        if ((_article_name.trim() == '') || (_price == 0)) {
+            // nothing to sell
+            return false;
+        }
+
+        App.contracts.ChainList.deployed().then(function(instance) {
+            return instance.sellArticle(_article_name, _description, _price, {
+                from: App.account,
+                gas: 500000
+            });
+        }).then(function(result) {
+            App.reloadArticles();
+        }).catch(function(err) {
+            console.error(err);
         });
     },
 
