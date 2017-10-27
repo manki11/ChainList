@@ -37,4 +37,25 @@ contract('ChainList', function (accounts) {
             assert.equal(data[3].toNumber(), web3.toWei(articlePrice, "ether"), "article price must be " + web3.toWei(articlePrice, "ether"));
         });
     });
+
+    // Test case: should check events
+    it("should trigger an event when a new article is sold", function() {
+        return ChainList.deployed().then(function(instance) {
+            chainListInstance = instance;
+            watcher = chainListInstance.sellArticleEvent();
+            return chainListInstance.sellArticle(
+                articleName,
+                articleDesc,
+                web3.toWei(articlePrice, "ether"), {from: seller}
+            );
+        }).then(function() {
+            return watcher.get();
+        }).then(function(events) {
+            assert.equal(events.length, 1, "should have received one event");
+            assert.equal(events[0].args._seller, seller, "seller must be " + seller);
+            assert.equal(events[0].args._name, articleName, "article name must be " + articleName);
+            assert.equal(events[0].args._price.toNumber(), web3.toWei(articlePrice, "ether"), "article price must be " + web3.toWei(articlePrice, "ether"));
+        });
+    });
+
 });
