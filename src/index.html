@@ -44,9 +44,7 @@
           <button class="btn btn-info btn-lg pull-right" data-toggle="modal" data-target="#sellArticle">Sell an article</button>
         </div>
       </div>
-      <ul id="events" class="collapse list-group">
-
-      </ul>
+      <ul id="events" class="collapse list-group"></ul>
     </div>
 
     <div id="articlesRow" class="row">
@@ -66,10 +64,9 @@
         <strong>Description</strong>: <span class="article-description"></span><br/>
         <strong>Price (ETH)</strong>: <span class="article-price"></span><br/>
         <strong>Sold by</strong>: <span class="article-seller"></span><br/>
-        <strong>Bought by</strong>: <span class="article-buyer"></span><br/>
       </div>
       <div class="panel-footer">
-        <button type="button" class="btn btn-primary btn-success btn-buy" onclick="App.buyArticle();return false;">Buy</button>
+        <button type="button" class="btn btn-primary btn-success btn-buy" onclick="App.buyArticle(); return false;">Buy</button>
       </div>
     </div>
   </div>
@@ -95,12 +92,12 @@
                 <input type="text" class="form-control" id="article_name" placeholder="Enter the name of your article">
               </div>
               <div class="form-group">
-                <label for="article_price">Price in ETH</label>
+                <label for="price">Price in ETH</label>
                 <input type="number" class="form-control" id="article_price" placeholder="1" pattern="[0-9]+([\.,][0-9]+)?" step="0.01">
               </div>
               <div class="form-group">
-                <label for="article_description">Description</label>
-                <textarea type="text" class="form-control resize" id="article_description" placeholder="Describe your article" maxlength="255"></textarea>
+                <label for="description">Description</label>
+                <textarea type="text" class="form-control vresize" id="article_description" placeholder="Describe your article" maxlength="255"></textarea>
               </div>
             </form>
           </div>
@@ -117,7 +114,9 @@
 
 <div id="footer" class="container">
   <nav class="navbar navbar-default navbar-fixed-bottom">
-
+    <div class="navbar-inner navbar-content-center text-center">
+      <p class="text-muted" credit><a href="http://chainskills.com">ChainSkills</a> - &copy; 2017 - <a href="https://twitter.com/sarbogast">Sebastien Arbogast</a> and <a href="https://twitter.com/eloudsa">Said Eloudrhiri</a></p>
+    </div>
   </nav>
 </div>
 
