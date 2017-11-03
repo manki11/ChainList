@@ -31,6 +31,13 @@ contract ChainList {
     uint256 _price
     );
 
+    //Modifiers
+    modifier onlyOwner(){
+        require(msg.sender == owner);
+        _;
+
+    }
+
     //constructor
     function ChainList(){
         owner= msg.sender;
@@ -119,8 +126,7 @@ contract ChainList {
     }
 
     //kill the smart contract
-    function kill(){
-        require(msg.sender == owner);
+    function kill() onlyOwner{
         selfdestruct(owner);
     }
 }
