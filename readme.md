@@ -16,7 +16,7 @@ npm install
 ##### Setting up the development environment 
 
 ```bash
-npm install -g ethereumjs-testrpc
+npm i ethereumjs-testrpc
 ```
 
 ```bash
